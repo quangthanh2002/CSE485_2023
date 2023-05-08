@@ -1,5 +1,4 @@
 <?php
-// Lớp Sinh viên
 class Student {
     private $id;
     private $name;
