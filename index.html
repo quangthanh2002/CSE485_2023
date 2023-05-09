@@ -1,0 +1,56 @@
+<?php
+class Student {
+    public $name;
+    public $age;
+    public $score;
+
+    public function __construct($name, $age, $score) {
+        $this->name = $name;
+        $this->age = $age;
+        $this->score = $score;
+    }
+}
+
+$students = [];
+
+$file = fopen('data.txt', 'r');
+
+if ($file) {
+    while (($line = fgets($file)) !== false) {
+        $data = explode(',', $line);
+        $name = trim($data[0]);
+        $age = intval($data[1]);
+        $score = floatval($data[2]);
+        $student = new Student($name, $age, $score);
+        array_push($students, $student);
+    }
+
+    fclose($file);
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Danh sách sinh viên</title>
+</head>
+<body>
+	<h1>Danh sách sinh viên</h1>
+
+	<table>
+		<tr>
+			<th>Tên</th>
+			<th>Tuổi</th>
+			<th>Điểm số</th>
+		</tr>
+
+		<?php foreach ($students as $student): ?>
+			<tr>
+				<td><?php echo $student->name; ?></td>
+				<td><?php echo $student->age; ?></td>
+				<td><?php echo $student->score; ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+</body>
+</html>
