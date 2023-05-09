@@ -52,5 +52,28 @@ if ($file) {
 			</tr>
 		<?php endforeach; ?>
 	</table>
+    <form>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age"><br>
+        <label for="grade">Grade:</label><br>
+        <input type="text" id="grade" name="grade"><br><br>
+        <input type="submit" value="Submit">
+      </form> 
+      <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $id = $_POST["id"];
+  $name = $_POST["name"];
+  $age = $_POST["age"];
+  $grade = $_POST["grade"];
+
+  $file = fopen("students.csv", "a");
+  fputcsv($file, array($id, $name, $age, $grade));
+  fclose($file);
+}
+?>
 </body>
 </html>
